@@ -1,4 +1,4 @@
-// File: D:\MERN Projects\call-recorder-next.js\app\layout.js
+// File: D:\MERN Projects\call-recorder-dashboard\app\layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
