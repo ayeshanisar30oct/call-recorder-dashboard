@@ -1,4 +1,4 @@
-// File: D:\MERN Projects\call-recorder-dashboard\app\page.js
+// File: D:\MERN Projects\call-recorder\call-recorder-dashboard\app\page.js
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
