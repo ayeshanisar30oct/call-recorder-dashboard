@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from 'react';
 
-export default function People() {
+export default function Users() {
 
     const [data, setData] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [editedData, setEditedData] = useState({});
      const [newUserData, setNewUserData] = useState({});
+     const [isCreating, setIsCreating] = useState(false); // Add isCreating state
 
   useEffect(() => {
     fetch('http://localhost:3030/users/') 
@@ -17,6 +18,7 @@ export default function People() {
 
       const handleEdit = (user) => {
         setIsEditing(true);
+        setIsCreating(false);
         setEditedData(user);
     };
 const handleSave = () => {
@@ -63,35 +65,11 @@ const handleSave = () => {
     });
 };
 const handleCreateUser = () => {
-        setIsEditing(true);
+        setIsEditing(false);
+        setIsCreating(true);
+                // setNewUserData({});
+
     };
-// const handleCreateUser = () => {
-//         fetch(`http://localhost:3030/users`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//                 name: 'New User', // Change the values as needed
-//                 email: 'newuser@example.com',
-//                 password: 'password123',
-//             }),
-//         })
-//             .then(response => response.json())
-//             .then(createdUser => {
-//                 if (createdUser.error) {
-//                     console.error('Error creating user:', createdUser.error);
-//                     alert('Error creating user. Please try again later.');
-//                 } else {
-//                     setData(prevData => [...prevData, createdUser]);
-//                     alert('User created successfully');
-//                 }
-//             })
-//             .catch(error => {
-//                 console.error('Error creating user:', error);
-//                 alert('Error creating user. Please try again later.');
-//             });
-//     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -102,7 +80,17 @@ const handleCreateUser = () => {
         }));
     }
     };
-     const handleSubmitNewUser = () => {
+    const handleNew = (e) => {
+        const { name, value } = e.target;
+         if (name && value) {
+        setNewUserData(prevData => ({
+            ...prevData,
+            [name]: value,
+        }));
+    }
+    };
+     const handleSubmitNewUser = (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
         fetch(`http://localhost:3030/users`, {
             method: 'POST',
             headers: {
@@ -111,16 +99,19 @@ const handleCreateUser = () => {
             body: JSON.stringify(newUserData),
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
         .then(createdUser => {
             // Handle success
             console.log('New user created:', createdUser);
             setIsEditing(false);
+            setIsCreating(false);
             setNewUserData({});
+            
+             alert('User created successfully');
             // Refresh data or update UI as needed
         })
         .catch(error => {
@@ -128,29 +119,92 @@ const handleCreateUser = () => {
             // Show error message to user
             alert('Error creating user. Please try again later.');
         });
+            console.log("New User Data:", newUserData); // Log newUserData
+            
+
     };
 
   return (
     <main>
       <div>
-        {isEditing ? (
+        {isCreating && (
           <div>
             <h2>Create New User</h2>
-            <form onSubmit={handleSubmitNewUser}>
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={newUserData.name || ""}
-                onChange={handleChange}
-              />
-              {/* Add input fields for other user attributes similarly */}
-              <button type="submit">Create User</button>
-            </form>
+         <form onSubmit={handleSubmitNewUser}>
+  {/* <label htmlFor="uuid">UUID:</label>
+  <input
+    type="text"
+    name="uuid"
+    value={editedData.uuid || ""}
+    onChange={handleChange}
+  /> */}
+  <label htmlFor="phone_number">Phone Number:</label>
+  <input
+    type="number"
+    name="phone_number"
+    value={newUserData.phone_number || ""}
+    onChange={handleNew}
+  />
+  <label htmlFor="email">Email:</label>
+  <input
+    type="email"
+    name="email"
+    value={newUserData.email || ""}
+    onChange={handleNew}
+  />
+  <label htmlFor="playerId">Player ID:</label>
+  <input
+    type="text"
+    name="playerId"
+    value={newUserData.playerId || ""}
+    onChange={handleNew}
+  />
+  <label htmlFor="connectionId">Connection ID:</label>
+  <input
+    type="text"
+    name="connectionId"
+    value={newUserData.connectionId || ""}
+    onChange={handleNew}
+  />
+  <label htmlFor="created_at">Created At:</label>
+  <input
+    type="date"
+    name="created_at"
+    value={newUserData.created_at || ""}
+    onChange={handleNew}
+  />
+  <label htmlFor="is_subscribed">Is Subscribed:</label>
+  <input
+    type="checkbox"
+    name="is_subscribed"
+        checked={newUserData.is_subscribed || ""}
+    // value={editedData.is_subscribed || ""}
+    onChange={handleNew}
+  />
+  <label htmlFor="deleted">Deleted:</label>
+  <input
+    type="checkbox"
+    name="deleted"
+        checked={newUserData.deleted || false}
+    // value={editedData.is_subscribed || ""}
+    onChange={handleNew}
+  />
+  <label htmlFor="deleted_at">Deleted At:</label>
+  <input
+    type="date"
+    name="deleted_at"
+    value={editedData.deleted_at || ""}
+    onChange={handleNew}
+  />
+  <button type="submit">Create User</button>
+</form>
+
           </div>
-        ) : (
-          <button onClick={handleCreateUser}>Create New User</button>
         )}
+
+        {!isCreating && (
+  <button onClick={handleCreateUser}>Create New User</button>
+)}
         {/* Render user table */}
         {/* <button onClick={handleCreateUser}>Create New User</button> */}
         <table className="min-w-full border-separate border-spacing-0">
@@ -219,7 +273,7 @@ const handleCreateUser = () => {
               <th
                 scope="col"
                 className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"
-              >
+              > Action
                 <span className="sr-only">Edit</span>
               </th>
             </tr>

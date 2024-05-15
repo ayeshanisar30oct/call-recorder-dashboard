@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getCookie } from "cookies-next";
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import People from "@/components/tables/node-users.table";
+import Users from "@/components/tables/users";
 import User from "@/components/tables/users.table";
 import {
   Bars3Icon,
@@ -21,18 +21,18 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 
 const navigation = [
-  { name: 'Dashboard', href: '#', page: '#', icon: HomeIcon, current: true },
-  { name: 'Users', href: '#', page: 'people', icon: UsersIcon, current: true },
+  { name: 'Dashboard', href: '', page: '/', icon: HomeIcon, current: true },
+  { name: 'Users', href: '#', page: 'users', icon: UsersIcon, current: true },
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', page: '#', icon: FolderIcon, current: false },
+  // { name: 'Projects', page: '#', icon: FolderIcon, current: false },
   // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   // { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
   // { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
 ]
 const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+  // { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
+  // { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
+  // { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
 ]
 const userNavigation = [
   { name: 'Your profile', href: '#' },
@@ -105,11 +105,11 @@ export default function Home() {
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-indigo-600 px-6 pb-4">
                     <div className="flex h-16 shrink-0 items-center">
-                      <img
+                      {/* <img
                         className="h-8 w-auto"
                         src="https://tailwindui.com/img/logos/mark.svg?color=white"
                         alt="Your Company"
-                      />
+                      /> */}
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -142,9 +142,9 @@ export default function Home() {
                           </ul>
                         </li>
                         <li>
-                          <div className="text-xs font-semibold leading-6 text-indigo-200">
+                          {/* <div className="text-xs font-semibold leading-6 text-indigo-200">
                             Your teams
-                          </div>
+                          </div> */}
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {teams.map((team) => (
                               <li key={team.name}>
@@ -192,11 +192,11 @@ export default function Home() {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-indigo-600 px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
-              <img
+              {/* <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=white"
                 alt="Your Company"
-              />
+              /> */}
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -230,9 +230,9 @@ export default function Home() {
                   </ul>
                 </li>
                 <li>
-                  <div className="text-xs font-semibold leading-6 text-indigo-200">
+                  {/* <div className="text-xs font-semibold leading-6 text-indigo-200">
                     Your teams
-                  </div>
+                  </div> */}
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {teams.map((team) => (
                       <li key={team.name}>
@@ -334,7 +334,7 @@ export default function Home() {
                         className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                         aria-hidden="true"
                       >
-                        Tom Cook
+                        User
                       </span>
                       <ChevronDownIcon
                         className="ml-2 h-5 w-5 text-gray-400"
@@ -376,7 +376,7 @@ export default function Home() {
 
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
-              {page == "people" && <People />}
+              {page == "users" && <Users />}
               {/* <User /> */}
             </div>
           </main>
