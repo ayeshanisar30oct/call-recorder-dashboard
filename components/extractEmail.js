@@ -1,9 +1,12 @@
 
 import { useEffect, useState } from "react";
+import { getCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 
-const jwtToken =
-  "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg0MDMyZGMxOTM2ZWEwMzI4ZWZjZjk2ZWNiODkzMzBjYzgxZmQwZWQ2YzQyYjUwNjFjOWMyNjM3YWY2MmVhMTEifQ.eyJhdWQiOlsiOTQyYTg1NWE4ZTk1MTZiN2MyZWZlYmY0OTlmODAyYzJlZGM0ZDE4MDFmZmI3MTcwZjI3ODM1ZDczYTZhM2M0NiJdLCJlbWFpbCI6InRvdXNlZWYuZXhlcnRsb2dpY3NAZ21haWwuY29tIiwiZXhwIjoxNzE4NDA2NjI3LCJpYXQiOjE3MTU3Nzg2MjcsIm5iZiI6MTcxNTc3ODYyNywiaXNzIjoiaHR0cHM6Ly9leGVydGxvZ2ljcy5jbG91ZGZsYXJlYWNjZXNzLmNvbSIsInR5cGUiOiJhcHAiLCJpZGVudGl0eV9ub25jZSI6IlFUcUNENGNBdGhkVnRjeDciLCJzdWIiOiIwZjBkOWE4MC01MGI1LTVjOTktODIxMy1mYTg3NTZhZmI2OTYiLCJjb3VudHJ5IjoiUEsifQ.VuN0wcx8MfZf7KwZq2SNDFlOaNsX1pXYU5kBKmZJKcosTqVRvaIIDWHKsDroTyhkGPoVzFR-FrvPXj95iFBGwf3ntkIJbTeYRgFy0pwUyW8M-RXZnWxgFl0sS0p0rZuss5WQldX6kgdZvR5dA2G1j761aoKMKWuX1GhUF0ur_XMRuzwn1UlOJuUkj_qLQpF2LrWLwT_rsn1vJ4BpxZozEsyzj9VIAv763a35UdiBHoipNZsEt1VlCHG7Dufv9wtK64bZtcvgDgJ2URBzCd2H1GyjpsDt-VcYoBUPhNIRcGegbd47-IX7HW_QStbfrKzTF3vvCe4QXVaLIYWanyntmQ";
+
+ const jwtToken = getCookie("CF_Authorization");
+ console.log("CF_Authorization token:", jwtToken);
+
 
   function decodeToken(token) {
     try {
@@ -12,7 +15,7 @@ const jwtToken =
 
       // Extract email from decoded token
       const email = decodedToken.email;
-      console.log(decodedToken);
+      // console.log(decodedToken);
       return email;
     } catch (error) {
       console.error("Error decoding token:", error);
