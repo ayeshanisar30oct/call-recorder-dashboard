@@ -4,7 +4,6 @@ import { getCookie } from "cookies-next";
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Users from "@/components/tables/users";
-import User from "@/components/tables/users.table";
 import {
   Bars3Icon,
   BellIcon,
@@ -18,6 +17,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import ExtractEmail from "@/components/extractEmail";
 
 
 const navigation = [
@@ -334,7 +334,7 @@ export default function Home() {
                         className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                         aria-hidden="true"
                       >
-                        User
+                        Admin_Name
                       </span>
                       <ChevronDownIcon
                         className="ml-2 h-5 w-5 text-gray-400"
@@ -377,7 +377,7 @@ export default function Home() {
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
               {page == "users" && <Users />}
-              {/* <User /> */}
+              <ExtractEmail/>
             </div>
           </main>
         </div>
