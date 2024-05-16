@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken";
  console.log("CF_Authorization token:", jwtToken);
 
 
+
+
   function decodeToken(token) {
     try {
       // Decode the token
@@ -35,7 +37,7 @@ function ExtractEmail() {
   }, []);
 
   return (
-    <div>{email ? <p>Email: {email}</p> : <p>No email found in token.</p>}</div>
+    <div>{email ? <p>Email:-- {email}</p> : <p>No email found in token.</p>}</div>
   );
 }
 
