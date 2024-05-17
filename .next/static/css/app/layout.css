@@ -883,6 +883,9 @@ select {
 .w-5 {
   width: 1.25rem;
 }
+.w-56 {
+  width: 14rem;
+}
 .w-6 {
   width: 1.5rem;
 }
@@ -897,6 +900,9 @@ select {
 }
 .w-px {
   width: 1px;
+}
+.w-52 {
+  width: 13rem;
 }
 .min-w-full {
   min-width: 100%;

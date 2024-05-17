@@ -4,6 +4,12 @@ import { getCookie } from "cookies-next";
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Users from "@/components/tables/users";
+import ExtractEmail from "@/components/extractEmail";
+import Calls from "@/components/tables/calls";
+import {
+  ChevronDownIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/20/solid";
 import {
   Bars3Icon,
   BellIcon,
@@ -15,14 +21,23 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import ExtractEmail from "@/components/extractEmail";
+  PhoneIcon,
+  ChatBubbleLeftEllipsisIcon,
+  SquaresPlusIcon,
+} from "@heroicons/react/24/outline";
+import VoiceMemos from "@/components/tables/voice-memos";
+import Subscriptions from "@/components/tables/subscriptions";
+
+
+
 
 
 const navigation = [
   { name: 'Dashboard', href: '', page: '/', icon: HomeIcon, current: true },
   { name: 'Users', href: '#', page: 'users', icon: UsersIcon, current: true },
+  { name: 'Calls', href: '#', page: 'calls', icon: PhoneIcon, current: true },
+  { name: 'Voice Memos', href: '#', page: 'voice-memos', icon: ChatBubbleLeftEllipsisIcon, current: true },
+  { name: 'Subscriptions', href: '#', page: 'subscriptions', icon: SquaresPlusIcon, current: true },
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
   // { name: 'Projects', page: '#', icon: FolderIcon, current: false },
   // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
@@ -122,7 +137,7 @@ export default function Home() {
                                   onClick={() => setPage(item.page)}
                                   className={classNames(
                                     item.current
-                                      ? "bg-indigo-700 text-white"
+                                      ? "bg-indigo-700 text-white w-52"
                                       : "text-indigo-200 hover:text-white hover:bg-indigo-700",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
@@ -378,6 +393,9 @@ export default function Home() {
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
               {page == "users" && <Users />}
+              {page == "calls" && <Calls />}
+              {page == "voice-memos" && <VoiceMemos />}
+              {page == "subscriptions" && <Subscriptions />}          
             </div>
           </main>
         </div>
