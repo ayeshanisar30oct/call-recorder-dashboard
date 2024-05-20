@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
+import classNames from "classnames";
 import {
   PencilSquareIcon,
   BookmarkSquareIcon,
@@ -141,82 +142,84 @@ export default function Users() {
 
   return (
     <main>
-      <div>
-        {isCreating && (
-          <div>
-            <h2 className="text-indigo-600 font-bold">Create New User</h2>
-            <form onSubmit={handleSubmitNewUser}>
-              <div className="space-y-12">
-                <div className="border-b border-gray-900/10 pb-12">
-                  <h2 className="text-base font-semibold leading-7 text-gray-900">
-                    Personal Information
-                  </h2>
-                  <p className="mt-1 text-sm leading-6 text-gray-600">
-                    Use a permanent email address where you can receive mails.
-                  </p>
+      {isCreating && (
+        <div>
+          <h2 className="text-indigo-600 font-bold">Create New User</h2>
+          <form onSubmit={handleSubmitNewUser}>
+            <div className="space-y-12">
+              <div className="border-b border-gray-900/10 pb-12">
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  Personal Information
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Use a permanent email address where you can receive mails.
+                </p>
 
-                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="sm:col-span-3">
-                      <label
-                        htmlFor="phone_number"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Phone Number:
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="number"
-                          name="phone_number"
-                          id="phone_number"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                          value={newUserData.phone_number || ""}
-                          onChange={handleCreate}
-                        />
-                      </div>
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="phone_number"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Phone Number:
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="number"
+                        name="phone_number"
+                        id="phone_number"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        value={newUserData.phone_number || ""}
+                        onChange={handleCreate}
+                      />
                     </div>
+                  </div>
 
-                    <div className="sm:col-span-3">
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Email:
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="email"
-                          name="email"
-                          id="email"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                          value={newUserData.email || ""}
-                          onChange={handleCreate}
-                        />
-                      </div>
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Email:
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        value={newUserData.email || ""}
+                        onChange={handleCreate}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-6 flex items-center justify-end gap-x-6">
-                <button
-                  type="button"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Cancel
-                </button>
+            <div className="mt-6 flex items-center justify-end gap-x-6">
+              <button
+                type="button"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Cancel
+              </button>
 
-                <button
-                  type="submit"
-                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
+              <button
+                type="submit"
+                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
-        {!isCreating && (
+      {/* Render user table */}
+
+      {!isCreating && (
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
               <h1 className="text-base font-semibold leading-6 text-gray-900">
@@ -237,160 +240,253 @@ export default function Users() {
               </button>
             </div>
           </div>
-        )}
-
-        {/* Render user table */}
-
-        {!isCreating && (
-          <table className="min-w-full border-separate border-spacing-0">
-            <thead>
-              <tr>
-                <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
-                >
-                  ID
-                </th>
-                <th
-                  scope="col"
-                  className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell"
-                >
-                  UUID
-                </th>
-                <th
-                  scope="col"
-                  className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"
-                >
-                  Phone Number
-                </th>
-                <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
-                >
-                  Email
-                </th>
-                {/* <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
-                >
-                  Player Id
-                </th> */}
-                {/* <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
-                >
-                  Connection Id
-                </th> */}
-                <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
-                >
-                  created At
-                </th>
-                {/* <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
-                >
-                  Is_Subscribed
-                </th> */}
-                {/* <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
-                >
-                  Deleted
-                </th> */}
-                {/* <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
-                >
-                  Deleted_At
-                </th> */}
-                <th
-                  scope="col"
-                  className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"
-                >
-                  Action
-                  <span className="sr-only">
-                    <PencilSquareIcon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {data &&
-                data.map((user) => (
-                  <tr key={user.id}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                      {user.id}
-                    </td>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                      {user.uuid}
-                    </td>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                      {isEditing && editedData.id === user.id ? (
-                        <input
-                          type="number"
-                          name="phone_number"
-                          value={editedData.phone_number || ""}
-                          onChange={handleUpdate}
-                        />
-                      ) : (
-                        user.phone_number || ""
-                      )}
-                    </td>
-
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                      {isEditing && editedData.id === user.id ? (
-                        <input
-                          type="email"
-                          name="email"
-                          value={editedData.email || ""}
-                          onChange={handleUpdate}
-                        />
-                      ) : (
-                        user.email || ""
-                      )}
-                    </td>
-
-                    {/* <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                      {user.playerId}
-                    </td> */}
-
-                    {/* <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                      {user.connectionId}
-                    </td> */}
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                      {user.created_at}
-                    </td>
-                    {/* <td>{user.is_subscribed}</td>
-                    <td>{user.deleted}</td>
-                    <td>{user.deleted_at}</td> */}
-                    <td>
-                      {isEditing && editedData.id === user.id ? (
-                        <button onClick={handleUpdateUser}>
-                          <BookmarkSquareIcon
-                            className="h-5 w-5"
-                            aria-hidden="true"
-                          />
-                        </button>
-                      ) : (
-                        <button onClick={() => handleEdit(user)}>
+          <div className="mt-8 flow-root">
+            <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+              <div className="inline-block min-w-full py-2 align-middle">
+                <table className="min-w-full border-separate border-spacing-0">
+                  <thead>
+                    <tr>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                      >
+                        ID
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                      >
+                        UUID
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"
+                      >
+                        Phone Number
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter xl:table-cell"
+                      >
+                        Email
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                      >
+                        Player Id
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                      >
+                        Connection Id
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter 2xl:table-cell"
+                      >
+                        created At
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                      >
+                        Is_Subscribed
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                      >
+                        Deleted
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                      >
+                        Deleted_At
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-5 text-center text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                      >
+                        Action
+                        <span className="sr-only">
                           <PencilSquareIcon
                             className="h-5 w-5"
                             aria-hidden="true"
                           />
-                        </button>
-                      )}
-                      <button onClick={() => handleDeleteUser(user.id)}>
-                        <TrashIcon className="h-5 w-5" aria-hidden="true" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+                        </span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data &&
+                      data.map((user, userIdx) => (
+                        <tr key={user.id}>
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-900"
+                            )}
+                          >
+                            {user.id}
+                          </td>
+
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-600"
+                            )}
+                          >
+                            {user.uuid}
+                          </td>
+
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " hidden whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-600 lg:table-cell"
+                            )}
+                          >
+                            {isEditing && editedData.id === user.id ? (
+                              <input
+                                type="number"
+                                name="phone_number"
+                                value={editedData.phone_number || ""}
+                                onChange={handleUpdate}
+                              />
+                            ) : (
+                              user.phone_number || ""
+                            )}
+                          </td>
+
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " hidden whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-600 xl:table-cell"
+                            )}
+                          >
+                            {isEditing && editedData.id === user.id ? (
+                              <input
+                                type="number"
+                                name="phone_number"
+                                value={editedData.email || ""}
+                                onChange={handleUpdate}
+                              />
+                            ) : (
+                              user.email || ""
+                            )}
+                          </td>
+
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " hidden whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-600"
+                            )}
+                          >
+                            {user.playerId}
+                          </td>
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " hidden whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-600"
+                            )}
+                          >
+                            {user.connectionId}
+                          </td>
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " hidden whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-600 2xl:table-cell"
+                            )}
+                          >
+                            {user.created_at}
+                          </td>
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " hidden whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-600"
+                            )}
+                          >
+                            {user.is_subscribed}
+                          </td>
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " hidden whitespace-nowrap px-3 py-4 text-left text-sm font-medium text-gray-600"
+                            )}
+                          >
+                            {user.deleted}
+                          </td>
+                          <td
+                            className={classNames(
+                              userIdx !== data.length - 1
+                                ? "border-b border-gray-400"
+                                : "",
+                              " hidden whitespace-nowrap px-3 py-4 text-center text-sm font-medium text-gray-600"
+                            )}
+                          >
+                            {user.deleted_at}
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-4 text-gray-600 text-center">
+                            {isEditing && editedData.id === user.id ? (
+                              <button
+                                className="hover:text-black px-1"
+                                onClick={handleUpdateUser}
+                              >
+                                <BookmarkSquareIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              </button>
+                            ) : (
+                              <button
+                                className="hover:text-black px-1"
+                                onClick={() => handleEdit(user)}
+                              >
+                                <PencilSquareIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              </button>
+                            )}
+                            <button
+                              className="hover:text-black px-1"
+                              onClick={() => handleDeleteUser(user.id)}
+                            >
+                              <TrashIcon
+                                className="h-5 w-5"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

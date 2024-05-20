@@ -27,27 +27,19 @@ import {
 } from "@heroicons/react/24/outline";
 import VoiceMemos from "@/components/tables/voice-memos";
 import Subscriptions from "@/components/tables/subscriptions";
+import SideBar from "@/components/sideBar";
+import Hero from "@/components/sections/hero";
 
 
 
 
 
 const navigation = [
-  { name: 'Dashboard', href: '', page: '/', icon: HomeIcon, current: true },
-  { name: 'Users', href: '#', page: 'users', icon: UsersIcon, current: true },
-  { name: 'Calls', href: '#', page: 'calls', icon: PhoneIcon, current: true },
-  { name: 'Voice Memos', href: '#', page: 'voice-memos', icon: ChatBubbleLeftEllipsisIcon, current: true },
-  { name: 'Subscriptions', href: '#', page: 'subscriptions', icon: SquaresPlusIcon, current: true },
-  // { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  // { name: 'Projects', page: '#', icon: FolderIcon, current: false },
-  // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  // { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  // { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
-const teams = [
-  // { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  // { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  // { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+  { name: 'Dashboard', href: '', page: 'hero', icon: HomeIcon, current: true },
+  { name: 'Users', href: '#', page: 'users', icon: UsersIcon, current: false },
+  { name: 'Calls', href: '#', page: 'calls', icon: PhoneIcon, current: false },
+  { name: 'Voice Memos', href: '#', page: 'voice-memos', icon: ChatBubbleLeftEllipsisIcon, current: false },
+  { name: 'Subscriptions', href: '#', page: 'subscriptions', icon: SquaresPlusIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Your profile', href: '#' },
@@ -64,8 +56,8 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [page, setPage] =useState()
 
-    const token = getCookie("CF_Authorization");
-  console.log("CF_Authorization token:", token);
+  //   const token = getCookie("CF_Authorization");
+  // console.log("CF_Authorization token:", token);
 
   return (
     <>
@@ -133,7 +125,7 @@ export default function Home() {
                           <ul role="list" className="-mx-2 space-y-1">
                             {navigation.map((item) => (
                               <li key={item.name}>
-                                <button
+                                <a
                                   onClick={() => setPage(item.page)}
                                   className={classNames(
                                     item.current
@@ -152,31 +144,6 @@ export default function Home() {
                                     aria-hidden="true"
                                   />
                                   {item.name}
-                                </button>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                        <li>
-                          {/* <div className="text-xs font-semibold leading-6 text-indigo-200">
-                            Your teams
-                          </div> */}
-                          <ul role="list" className="-mx-2 mt-2 space-y-1">
-                            {teams.map((team) => (
-                              <li key={team.name}>
-                                <a
-                                  href={team.href}
-                                  className={classNames(
-                                    team.current
-                                      ? "bg-indigo-700 text-white"
-                                      : "text-indigo-200 hover:text-white hover:bg-indigo-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                  )}
-                                >
-                                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white">
-                                    {team.initial}
-                                  </span>
-                                  <span className="truncate">{team.name}</span>
                                 </a>
                               </li>
                             ))}
@@ -220,7 +187,7 @@ export default function Home() {
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
-                        <button
+                        <a
                           onClick={() => setPage(item.page)}
                           href={item.href}
                           className={classNames(
@@ -240,31 +207,6 @@ export default function Home() {
                             aria-hidden="true"
                           />
                           {item.name}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-                <li>
-                  {/* <div className="text-xs font-semibold leading-6 text-indigo-200">
-                    Your teams
-                  </div> */}
-                  <ul role="list" className="-mx-2 mt-2 space-y-1">
-                    {teams.map((team) => (
-                      <li key={team.name}>
-                        <a
-                          href={team.href}
-                          className={classNames(
-                            team.current
-                              ? "bg-indigo-700 text-white"
-                              : "text-indigo-200 hover:text-white hover:bg-indigo-700",
-                            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                          )}
-                        >
-                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white">
-                            {team.initial}
-                          </span>
-                          <span className="truncate">{team.name}</span>
                         </a>
                       </li>
                     ))}
@@ -305,7 +247,7 @@ export default function Home() {
             />
 
             <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-              <form className="relative flex flex-1" action="#" method="GET">
+              <form className="relative flex flex-1" action="" method="GET">
                 <label htmlFor="search-field" className="sr-only">
                   Search
                 </label>
@@ -392,10 +334,13 @@ export default function Home() {
 
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
+            {/* <Hero/> */}
+              {page == "hero" && <Hero/>}
               {page == "users" && <Users />}
               {page == "calls" && <Calls />}
               {page == "voice-memos" && <VoiceMemos />}
-              {page == "subscriptions" && <Subscriptions />}          
+              {page == "subscriptions" && <Subscriptions />}      
+              {/* <SideBar/>     */}
             </div>
           </main>
         </div>
