@@ -52,7 +52,7 @@ export default function Users() {
           // Show alert message
           setIsEditing(false);
           alert("User data edited successfully");
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch((error) => {
@@ -376,8 +376,8 @@ export default function Users() {
                           >
                             {isEditing && editedData.id === user.id ? (
                               <input
-                                type="number"
-                                name="phone_number"
+                                type="email"
+                                name="email"
                                 value={editedData.email || ""}
                                 onChange={handleUpdate}
                               />
